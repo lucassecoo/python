@@ -1,0 +1,6 @@
+----------MENU-----------
+1. Cadastrar produto
+2. Listar produtos
+3. Atualizar produtos
+4. Excluir produtos
+-------------------------
