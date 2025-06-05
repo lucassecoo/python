@@ -1,3 +1,4 @@
+
 class Produto:
     def __init__(self, nome, preco, quantidade):
         # Validações no construtor
@@ -13,14 +14,9 @@ class Produto:
         self.quantidade = int(quantidade)
     
     # Getters e Setters
-    def getNome(self):
-        return self.nome
-    
-    def getPreco(self):
-        return self.preco
-    
-    def getQuantidade(self):
-        return self.quantidade
+    def getNome(self): return self.nome
+    def getPreco(self): return self.preco
+    def getQuantidade(self): return self.quantidade
     
     def setNome(self, nome):
         if not isinstance(nome, str) or not nome:
@@ -38,15 +34,22 @@ class Produto:
         self.quantidade = int(quantidade)
 
 
+    # Método __str__ para facilitar a representação do objeto como string (usado para salvar no arquivo)
+    def __str__(self):
+        return f"{self.nome},{self.preco:.2f},{self.quantidade}"
+
+    # Método __repr__ para representação em listas/debug (útil para depuração)
+    def __repr__(self):
+        return self.__str__()
+    
+
     #  Métodos auxiliares para entrada 
     @staticmethod
     def _obter_entrada_nao_vazia(mensagem):
         while True:
             entrada = input(mensagem).strip()
-            if entrada:
-                return entrada
-            else:
-                print("Valor não pode ser vazio!")
+            if entrada: return entrada
+            else: print("Valor não pode ser vazio!")
 
     @staticmethod
     def _obter_numero_valido(mensagem, tipo=float):
@@ -54,12 +57,9 @@ class Produto:
             entrada_str = Produto._obter_entrada_nao_vazia(mensagem)
             try:
                 numero = tipo(entrada_str)
-                if numero < 0:
-                    print("Valor não pode ser negativo!")
-                else:
-                    return numero
-            except ValueError:
-                print(f"Entrada inválida. Por favor, digite um número.")
+                if numero < 0: print("Valor não pode ser negativo!")
+                else: return numero
+            except ValueError: print(f"Entrada inválida. Por favor, digite um número.")
 
 
     ### FUNÇÃO PARA CRIAR UM NOVO PRODUTO
@@ -81,3 +81,4 @@ class Produto:
         except Exception as e:
             print(f'Ocorreu um erro inesperado ao criar o produto: {e}')
             return None # Retorna None para outros erros inesperados
+        
